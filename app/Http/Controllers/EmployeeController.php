@@ -73,14 +73,20 @@ class EmployeeController extends Controller
 
         $employee->skills()->sync($request->skills ?? []);
 
-        return redirect()->route('employees.index');
+        return redirect()
+            ->route('employees.index');
+
     }
 
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return back();
+
+        return response()->json([
+            'message' => 'Employee deleted successfully'
+        ], 200);
     }
+
 
     // AJAX Filter
     public function filter($departmentId)
